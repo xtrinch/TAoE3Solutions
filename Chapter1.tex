@@ -1,9 +1,13 @@
 \documentclass{article}
 \usepackage{taoesolutions}
+\usepackage{tikz}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
 
 \begin{document}
 \title{Solutions for Chapter 1}
     \ex{1.1}
+    \textit{You have a 5k resistor and a 10k resistor. What is their combined resistance (a) in series and (b) in parallel?}
+
     \begin{enumerate}
         \item 
         $R = 5\k + 10\k = \mans{15\k\Omega}$
@@ -14,28 +18,230 @@
     \end{enumerate}
 
     \ex{1.2}
+    \textit{If you place a 1 ohm resistor across a 12 volt car battery, how much power will it dissipate?}
+    \bigskip
+
     $P = IV = \left(\dfrac{V}{R}\right)V = \dfrac{(12\V)^2}{1\Ohm} = \mans{144\W}$
 
     \ex{1.3}
-    Consider a simple series resistor circuit.
-    \begin{circuit}{fig:1.3.1}{A basic series circuit.}
-        (0,0) to[V=$V_\in$] (4,0)
-            to (4,2)
-            to[R=$R_2$] (2,2)
-            to[R=$R_1$] (0,2)
-            to (0,0)
-    \end{circuit}
-    By 
-    \todo{Solve this problem}
+    \textit{Prove the formulas for (a) series and (b) parallel resistors.}
+
+    \begin{enumerate}
+        \item
+        Series resistors:
+        \begin{circuit}{fig:1.3.1}{A basic series circuit.}
+            (0,0) to[V=$V_\in$] (4,0)
+                to (4,2)
+                to[R=$R_2$] (2,2)
+                to[R=$R_1$] (0,2)
+                to (0,0)
+        \end{circuit}
+
+        $V_{in} = V_{1} + V_{2}$ (Kirchoff's voltage law)\\
+
+        $R = \dfrac{V_{in}}{I} = \dfrac{(V_{1} + V_{2})}{I} = \dfrac{V_{1}}{I} + \dfrac{V_{2}}{I}$ \\
+
+        $R_{1} = \dfrac{V_{1}}{I}$ \\
+
+        $R_{2} = \dfrac{V_{2}}{I}$ \\
+
+        $R = R_{1} + R_{2}  \checkmark $ \\
+
+        \item
+        Parallel resistors:
+        \begin{circuit}{fig:1.3.1}{A basic parallel circuit.}
+            (0,0) to[V=$V_\in$] (0,2)
+                to (2,2)
+                to[R=$R_2$,  v_<=$I_{2}$] (2,0)
+                to (4,0)
+                (4, 2) to[R=$R_1$,  v_<=$I_{1}$] (4,0)
+                (4, 2) to (2,2)
+                (2, 0) to (0,0)
+        \end{circuit}
+
+        $I = I_{1} + I_{2}$ (Kirchoff's current law)\\
+
+        $V_{in} = V_{1} =  V_{2}$ (Kirchoff's voltage law)\\
+
+        $R = \dfrac{V_{in}}{I} = \dfrac{V_{in}}{I_{1} + I_{2}} = \dfrac{1}{\dfrac{I_{1} + I_{2}}{V_{in}}} = \dfrac{1}{\dfrac{I_{1}}{V_{in}} + \dfrac{I_{2}}{V_{in}}}$  \\
+
+        $\dfrac{1}{R_{1}} = \dfrac{I_{1}}{V_{in}}$ \\
+
+        $\dfrac{1}{R_{2}} = \dfrac{I_{2}}{V_{in}}$ \\
+
+        $R = \dfrac{1}{\dfrac{1}{R_{1}} + \dfrac{1}{R_{2}}} \checkmark $ \\
+
+    \end{enumerate}
 
     \ex{1.4}
-    \todo{Solve this problem}
+    \textit{Show that several resistors in parallel have resistance:}
+        $R = \dfrac{1}{\dfrac{1}{R_{1}} + \dfrac{1}{R_{2}} + \dfrac{1}{R_{3}} + ...} $ \\
+
+
+        Parallel resistors:
+        \begin{circuit}{fig:1.3.1}{A multiple-resistor parallel circuit.}
+            (0,0) to[V=$V_\in$] (0,2)
+                to (2,2)
+                to[R=$R_1$,  v_<=$I_{1}$] (2,0)
+                to (4,0)
+                (4, 2) to[R=$R_2$,  v_<=$I_{2}$] (4,0)
+                (4, 2) to (2,2)
+                (2, 0) to (0,0)
+                (4, 0) to (6, 0)
+                (4, 2) to (6, 2)
+                (6, 2) to[R=$R_3$,  v_<=$I_{3}$] (6,0)
+        \end{circuit}
+
+        $I = I_{1} + I_{2} + I_{3}$ (Kirchoff's current law)\\
+
+        $V_{in} = V_{1} =  V_{2} = V_{3}$ (Kirchoff's voltage law)\\
+
+        $R = \dfrac{V_{in}}{I} = \dfrac{V_{in}}{I_{1} + I_{2} + I_{3}} = \dfrac{1}{\dfrac{I_{1} + I_{2} + I_{3}}{V_{in}}} = \dfrac{1}{\dfrac{I_{1}}{V_{in}} + \dfrac{I_{2}}{V_{in}} + \dfrac{I_{3}}{V_{in}}}$  \\
+
+        $\dfrac{1}{R_{1}} = \dfrac{I_{1}}{V_{in}}$ \\
+
+        $\dfrac{1}{R_{2}} = \dfrac{I_{2}}{V_{in}}$ \\
+
+        $\dfrac{1}{R_{3}} = \dfrac{I_{3}}{V_{in}}$ \\
+
+        $R = \dfrac{1}{\dfrac{1}{R_{1}} + \dfrac{1}{R_{2}} + \dfrac{1}{R_{3}}} \checkmark $ \\
+
+        \bigskip
+        We can use the same formula for any number of resistors in parallel.
 
     \ex{1.5}
-    Given that $P = \dfrac{V^2}{R}$, we know that the maximum voltage we can achieve is 15V and the smallest resistance we can have across the resistor in question is $1\k\Ohm$. Therefore, the maximum amount of power dissipated can be given by \[P = \frac{V^2}{R} = \frac{(15\V)^2}{1\k\Ohm} = \mans{0.225\W}\]
+    \textit{Show that it is not possible to exceed the power rating of a 1/4 watt resistor of resistance greater than 1k, no matter how you connect it, in a circuit operating from a 15 volt battery.}
+    \bigskip
+
+    We know that the maximum voltage we can achieve is 15V and the smallest resistance we can have across the resistor in question is $1\k\Ohm$. Therefore, the maximum amount of power dissipated can be given by 
+
+    \[P = IV = \left(\dfrac{V}{R}\right)V = \dfrac{V^2}{R} = \frac{(15\V)^2}{1\k\Ohm} = \mans{0.225\W}\]
+    
     This is less than the 1/4W power rating.
 
+    \ex{1.6}
+    \textit{New York City requires about $10^{10}$ watts of electrical power, at 115 volts (this is plausible: 10 million people averaging 1 kilowatt each). A heavy power cable might be an inch in diameter. Let's calculate what will happen if we try to supply the power through a cable 1 foot in length made of pure copper. Its resistance is $0.05\mu\Ohm  (5 \times 10^{-8} \Ohm)$ per foot. Calculate (a) the power lost per foot from "$I^2R$ losses", (b) the length of cable over which you will lose all $10^{10}$ watts, and (c) how hot the cable will get, if you know the physics involved $(\sigma = 6 \times 10^{-12} \dfrac{W}{K^4 cm^2})$. If you have done your computations correcty, the results should seem preposterous. What is the solution to this puzzle?}
+
+    \begin{enumerate}
+        \item
+        We can use the voltage and the necessary power to calculate the current that should be flowing.\\
+
+        $P = I V$ \\
+
+        $I = \dfrac{P}{V} = \dfrac{10^{10} W} {115 V} = 86956521 A$ \\
+
+       From that, we can calculate the power lost per foor by using the resistance per foot.\\
+
+        $P = I^2 R$ \\
+
+        $P = (86956521 A)^{2} (5 \times 10^{-8} \Ohm) = 378071833.6 W = 3.780718336 \times 10^{8} W$\\
+
+        \item
+        If we know how much power is dissipated per foot, it is easy enough to calculate how many feet it would take to dissipate all the power.\\
+
+        $\dfrac{10^{10} W}{3.780718336 \times 10^{8} W} = 26.45 ft$\\
+
+        \item
+        \todo{solve}
+
+    \end{enumerate}
+
+    \ex{1.7}
+    \textit{What will a 20000 \Ohm/V meter read on its 1V scale, when attached to a 1V source with an internal resistance of 10k? What will it read when attached to a 10k-10k voltage divider driven by a "stiff" (zero source resistance) 1V source?}
+
+   \begin{enumerate}
+       \item
+       We can use our knowledge of voltage dividers to solve this equation with s standing for source and m for multimeter.
+
+        \begin{circuit}{fig:1.10.1}{Measuring diagram}
+            % \label{1.10fig1}
+            (0,4) to[V=$V_{s}$] (0,0)
+            to[short] (2,0)
+            (2, 2) to[R=$R_{m}$] (2,4)
+            (2, 0) to [voltmeter] (2, 2)
+            (2, 4) to[R=$R_{s}$](0,4)
+            (2,0) to[short, *-o] (3,0)
+            (2,4) to[short, *-o] (3,4)
+            (3,0) to[open, v_<=$V_{m}$] (3,4)
+        \end{circuit}
+
+        $V_{s} = 1V$ \\\\
+        $R_{s} = 10000 \Ohm$ \\\\
+        $R_{m} = 20000 \Ohm$ \\
+        \noindent\rule{4cm}{.1pt} \\\\
+        $V_{m} = V_{s} \dfrac{R_{m}}{R_{s} + R_{m}} = \dfrac{2}{3} = 0.66$ \\
+
+        \item
+        Next up we use a 10k-10k voltage divider with resistances $R_{1}$ and $R_{2}$. We need to first find the common resistance of multimeter and one of the resistors, then use that common resistance to calculate read voltage via the voltage divider equation.
+
+
+        \begin{circuit}{fig:1.10.5}{Measuring diagram for a 10k-10k voltage divider}
+                (0,4) to[V, l_=$V_{s}$] (0,0)
+                to[short] (3,0)
+                (3, 0) to[R=$R_{m}$] (3,2)
+                (3, 2) to [voltmeter] (3, 4)
+                (4,0) to[open, v_<=$V_{m}$] (4,4)
+                to[short] (2,4)
+                to[R=$R_1$] (0,4)
+                (3, 0) to (4,0)
+                (2,0) to[R=$R_2$, *-*] (2,4)
+        \end{circuit}
+
+        $V_{s} = 1V$ \\\\
+        $R_{s} = 0 \Ohm$ \\\\
+        $R_{1} = R_{2} = 10000 \Ohm$ \\\\
+        $R_{m} = 20000 \Ohm$ \\
+        \noindent\rule{4cm}{.1pt} \\\\
+        $R_{com} = \dfrac{R_{1} R_{m}}{R_{1} + R_{m}} = 6666.6 \Ohm$ \\\\
+        $V_{m} = V_{s} \dfrac{R_{com}}{R_{1} + R_{com}} = 0.4V$ \\
+
+   \end{enumerate}
+
+    \ex{1.8}
+    \textit{A $50 \mu A$ meter movement has an internal resistance of 5k. What shunt resistance is needed to convert it to a 0-1A meter? What series resistance will convert it to a 0-10V meter?}
+
+   \begin{enumerate}
+        \item
+        We put a shunt resistor in parallel to the measuring device and all we need is Kirchoff's voltage law to solve this one.
+
+        \begin{circuit}{fig:1.10.5}{Current measuring with shunt}
+                (0,2) to (2,2)
+                (6, 2) to (8,2)
+                (2, 2) to [R=$R_{m}$, v_<=$I_{m}$] (4,2)
+                (4, 2) to [ammeter] (6, 2)
+                (2, 0) to [R=$R_{sh}$, v_<=$I_{sh}$] (6,0)
+                (2, 0) to (2, 2)
+                (6, 0) to (6,2)
+        \end{circuit}
+
+        $I_{m} = 50 \mu A$ \\\\
+        $I_{max} = I_{m} + I_{sh} = 1 A$ \\\\
+        $I_{sh} = I_{max} - I_{m} \approx I_{max}$ \\\\
+        $R_{m} = 5k \Ohm$ \\
+        \noindent\rule{4cm}{.1pt} \\\\
+        $V_{m} = V_{sh}$ \\\\
+        $I_{m} R_{m} = I_{sh} R_{sh}$ \\\\
+        $R_{sh} =\dfrac{ I_{m} R_{m} } { I_{sh} } = 0.25 \Ohm$ \\\\
+
+        \item
+         Another resistor is put in series.
+
+        \begin{circuit}{fig:1.10.5}{Changing voltage range}
+                (0, 2) to (2,2)
+                (8, 2) to (10,2)
+                (2, 2) to [R=$R_{s}$, v_<=$I_{s}$] (4,2)
+                (4, 2) to [R=$R_{m}$, v_<=$I_{m}$] (6,2)
+                (6, 2) to [ammeter] (8, 2)
+        \end{circuit}
+
+        $V_{max} = I_{m} (R_{s} + R_{m})$\\\\
+        $R_{s} = \dfrac{V_{max}}{ I_{m} } - R_{m} = 195k \Ohm$
+
+    \end{enumerate}
+
     \ex{1.10}
+    \textit{For the circuit shown in Figure 1.12, with $V_{in} = 30V$ and $R_{1} = R_{2} = 10k \Ohm$, find (a) the output voltage with no load attached (the open-circuit voltage); (b) the output voltage with a 10k load (treat as a voltage divider, with $R_{2} and R_{load}$ combined into a single resistor); (c) the Thevenin equivalent circuit; (d) the same as in part (b), but using the Thevenin equivalent circuit (again, you wind up with a voltage divider; the answer should agree with the result in part (b)); (e) the power dissipated in each of the resistors.}
+
     \begin{enumerate}
         \item 
         With two equal-value resistors, the output voltage is half the input voltage.
@@ -44,7 +250,17 @@
         \item 
         To treat $R_2$ and $R_{load}$ as a single resistor, combine the two resistors which are in parallel to find that the combined (equivalent) resistance is $5\k\Ohm$. Now, we have a simple voltage divider with a $10\k\Ohm$ resistor in series with the $5\k\Ohm$ equivalent resistor. The output voltage is across this equivalent resistance. The output voltage is given by 
         \[V_{out} = V_{in} \frac{5\k\Ohm}{10\k\Ohm + 5\k\Ohm} = \frac{30\V}{3} = \mans{10\V} \]
-        \todo{Add a diagram to make this clearer}
+        
+        \begin{circuit}{fig:1.10.5}{Measuring diagram for a 10k-10k voltage divider with load}
+                (0,2) to[V, l_=$V_{s}$] (0,0)
+                to[short] (3,0)
+                (3, 0) to[R=$R_{lo}$] (3,2)
+                (4,0) to[open, v_<=$V_{m}$] (4,2)
+                to[short] (2,2)
+                to[R=$R_1$] (0,2)
+                (3, 0) to (4,0)
+                (2,0) to[R=$R_2$, *-*] (2,2)
+        \end{circuit}
 
         \item 
         We can redraw the voltage divider circuit to make the ``port'' clearer. 
@@ -116,6 +332,8 @@
     \end{enumerate}
 
     \ex{1.11}
+    \textit{Show that $R_{load} = R_{source}$ maximizes the power in the load for a given source resistance.}\\
+
     Consider the following Th\'evenin circuit where $R_\source$ is just another name for the Th\'evenin resistance, $R_\Th$.
     \begin{circuit}{fig:1.11.1}{Standard Th\'evenin circuit with attached load.}
         (0,2) to[V, l_=$V_\Th$] (0,0)
@@ -133,6 +351,7 @@
     \end{align*}
 
     \ex{1.12}
+    \textit{Determine the voltage and power ratios for a pair of signals with the following decibel ratios: (a) 3 dB, (b) 6 dB, (c) 10 dB, (d) 20dB.}
     \begin{enumerate}
         \item 
         Voltage ratio: $\frac{V_2}{V_1} = 10^{db/20} = 10^{3/20} = \mans{1.413}$
@@ -156,6 +375,8 @@
     \end{enumerate}
 
     \ex{1.13}
+    \textit{We might call this amusing exercise "Desert Island dBs": in the table below we've started entering some values for power ratios corresponding to the first dozen integral dBs, using the results for parts (a) and (c) of the last exercise. Your job is to complete the table, without recourse to a calculator. A possibly helpful hint: starting at 10 dB, go down the table in steps of 3 dB, then up in a step of 10 dB, then down again. Finally, get rid of yucky numbers like 3.125 (and its near relatives) by noticing that it's charmingly close to $\Pi$ .}\\
+
     There are two important facts to notice from Exericse 1.12:
     \begin{enumerate}[label=\arabic*.]
         \item 
@@ -185,6 +406,10 @@
     \end{center}
 
     \ex{1.14}
+    \textit{Take the energy challenge: imagine charging up a capacitor of capacitance C, from 0V to some final voltage $V_{f}$. If you do it right, the result won't depend on how you get there, so you don't need to assume constant current charging (though you are welcome to do so). At any instant the rate of flow of energy into the capacitor is VI (joules/s); so you need to integrate dU = VIdt from start to finish. Take it from there.}\\
+
+    Main thing to note is that energy is an integral of power over a period of time.\\
+
     Recall the relationship between $I$, $V$, and $C$: $I = C\frac{dV}{dt}$. Now, we perform the integration:
     \begin{align*}
         \int dU &= \int_{t_0} ^{t_1} VIdt\\
@@ -194,6 +419,8 @@
     \end{align*}
 
     \ex{1.15}
+    \textit{Derive the formula for the capcitance of two capacitors in series. Hint: because there is no external connection to the point where the two capacitors are connected together, they must have equal stored charges.}\\
+
     Consider the following two capacitors in series.
     \begin{circuit}{fig:1.15.1}{Two capacitors in series.}
         (0,0) to[C=$C_1$] (2,0)
@@ -214,6 +441,8 @@
     }
 
     \ex{1.16}
+    \textit{Show that the rise time (the time required for going from $10\%$ to $90\%$ of its final value) of this signal is 2.2RC.}\\
+
     Equation 1.21 gives us the relationship between the time and the voltage ($V_\out$) across the capacitor while charging. To find the rise time, subtract the time it takes to reach 10\% of the final value from the time it takes to reach 90\% of the final value.
     \begin{align*}
         V_\out &= 0.1V_f = V_f(1-e^{-t_1/RC}) \\
